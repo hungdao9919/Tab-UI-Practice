@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Tab UI Demo</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: "Poppins", sans-serif;;
+            display: flex;
+            justify-content: center;
+        }
+        .tab-ui{
+            max-width: 720px;
+            height: 300px;
+            padding: 30px;
+        }
+        .tabs{
+            display: flex;  
+            position: relative;
+            
+
+        }
+        .tabs .line{
+            position: absolute;
+            background-color: #c23564;
+            left: 0;
+            bottom: 0;
+            height: 6px;
+            width: 0;
+            border-radius: 15px;
+            transition: all ease 0.2s;
+
+        }
+        .tab-item{
+            position: relative;
+            padding: 12px 20px;
+            font-size: 20px;
+            text-align: center;
+            color: #c23564;
+            opacity: 0.6;
+            background-color: rgba(194, 53, 100,0); 
+            border-bottom: rgba(194, 53, 100,0) 6px solid;
+            transition: all ease 0.2s;
+            cursor: pointer;
+        }
+        .tab-item:hover{
+            background-color: rgba(194, 53, 100,0.1);
+            border-bottom: rgba(194, 53, 100,0.1) 6px solid;
+
+            opacity: 1;
+
+        }
+        .tab-item.active{
+            opacity: 1;
+        }
+        .tab-item i{
+            font-size: 24px;
+            padding-right: 4px;
+            position: relative;
+            top: 2px;
+        }
+        .content-item{
+            color: #333;
+            display: none;
+        }
+        .content-item.active{
+            display: block;
+        }
+        
+
+
+
+    </style>
+</head>
+<body>
+    <div class="tab-ui">
+        <!-- Tab -->
+        <div class="tabs">
+            <div class="tab-item active">
+                <i class="fa-solid fa-code"></i>
+                React
+            </div>
+            <div class="tab-item">
+                <i class="fa-solid fa-gear"></i>
+                Angular
+            </div>
+            <div class="tab-item">
+                <i class="fa-solid fa-circle-plus"></i>
+                Ember
+            </div>
+            <div class="tab-item">
+                <i class="fa-solid fa-pen-nib"></i>
+                Vue.JS
+            </div>
+            <div class="line"></div>
+
+        </div>
+
+        <!-- Tab content -->
+        <div class="tab-content">
+            <div class="content-item active">
+                <h2>React</h2>
+                <p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.</p>
+            </div>
+            <div class="content-item">
+                <h2>Angular</h2>
+                <p>Angular is an application design framework and development platform for creating efficient and sophisticated single-page apps.</p>
+            </div>
+            <div class="content-item">
+                <h2>Ember</h2>
+                <p>Ember.js is a productive, battle-tested JavaScript framework for building modern web applications. It includes everything you need to build rich UIs that work on any device.</p>
+            </div>
+            <div class="content-item">
+                <h2>Vue.JS</h2>
+                <p>Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable.</p>
+            </div>
+
+
+        </div>
+    </div>
+    <script>
+
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+
+        const tabs =$$('.tab-item')
+        const contentItems = $$('.content-item') 
+
+        const line = $('.line')
+        const tabActive = $('.tab-item.active')
+
+        line.style.left = tabActive.offsetLeft + 'px'
+        line.style.width = tabActive.offsetWidth + 'px'
+
+        tabs.forEach((tab,index) => {
+
+            tab.onclick = function(){
+                $('.tab-item.active').classList.remove('active')
+                this.classList.add('active')
+
+                $('.content-item.active').classList.remove('active')
+                contentItems[index].classList.add('active')
+
+                line.style.left = this.offsetLeft + 'px'
+                line.style.width = this.offsetWidth + 'px'
+
+            }
+
+
+        })
+    </script>
+    
+</body>
+</html>
